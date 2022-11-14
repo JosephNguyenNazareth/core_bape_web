@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Role name="Backend Developer"  project_manager="false">
+	<Task name="Create Controllers">
+		<InputArtifact name="Source Code" state="init"/>
+		<OutputArtifact name="Controllers Module" state="defined"/>
+	</Task>
+	<Task name="Create Data Storage">
+		<InputArtifact name="Source Code" state="init"/>
+		<OutputArtifact name="Data Module" state="defined"/>
+	</Task>
+	<Task name="Add Documentation">
+		<InputArtifact name="Controllers Module" state="defined"/>
+		<InputArtifact name="Data Module" state="defined"/>
+		<InputArtifact name="Source Code" state="defined"/>
+		<OutputArtifact name="Documentation" state="modified"/>
+	</Task>
+</Role>

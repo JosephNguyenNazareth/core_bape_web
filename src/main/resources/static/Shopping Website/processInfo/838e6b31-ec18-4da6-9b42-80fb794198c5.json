@@ -1,0 +1,260 @@
+{
+"id": "838e6b31-ec18-4da6-9b42-80fb794198c5",
+"name": "Shopping Website",
+"creator": {
+"name": "TL1",
+"role": {
+"name": "Team Leader",
+"projectManager": "true"
+}
+},
+"createdTime": " 2022-11-08T10:02:10.246",
+"taskList": [{
+"id": "46d895fd-62f2-451f-b93c-89d14ef5e54c",
+"name": "Create Controllers",
+"inputInstanceList": [],
+"outputInstanceList": [],
+"inputList": [{
+"name": "Source Code",
+"type": "input",
+"state": "init"
+}],
+"outputList": [{
+"name": "Controllers Module",
+"type": "output",
+"state": "defined"
+}],
+"actor": {
+"name": "B1",
+"role": {
+"name": "Backend Developer",
+"projectManager": "false"
+}
+},
+"stateMachine": {
+"state": "init"
+}
+}, {
+"id": "1ce49e4e-9f0a-48d7-b7d0-47f0a48060bd",
+"name": "Create Data Storage",
+"inputInstanceList": [],
+"outputInstanceList": [],
+"inputList": [{
+"name": "Source Code",
+"type": "input",
+"state": "init"
+}],
+"outputList": [{
+"name": "Data Module",
+"type": "output",
+"state": "defined"
+}],
+"actor": {
+"name": "B1",
+"role": {
+"name": "Backend Developer",
+"projectManager": "false"
+}
+},
+"stateMachine": {
+"state": "init"
+}
+}, {
+"id": "e659959e-5dbe-44a8-87a9-5df44826781a",
+"name": "Add Documentation",
+"inputInstanceList": [],
+"outputInstanceList": [],
+"inputList": [{
+"name": "Controllers Module",
+"type": "input",
+"state": "defined"
+}, {
+"name": "Data Module",
+"type": "input",
+"state": "defined"
+}, {
+"name": "Source Code",
+"type": "input",
+"state": "defined"
+}],
+"outputList": [{
+"name": "Documentation",
+"type": "output",
+"state": "modified"
+}],
+"actor": {
+"name": "B1",
+"role": {
+"name": "Backend Developer",
+"projectManager": "false"
+}
+},
+"stateMachine": {
+"state": "init"
+}
+}, {
+"id": "14e358c8-b049-4550-a330-4fb1dcfe714b",
+"name": "Create Views",
+"inputInstanceList": [],
+"outputInstanceList": [],
+"inputList": [{
+"name": "Source Code",
+"type": "input",
+"state": "init"
+}],
+"outputList": [{
+"name": "Views Module",
+"type": "output",
+"state": "defined"
+}],
+"actor": {
+"name": "F1",
+"role": {
+"name": "Frontend Developer",
+"projectManager": "false"
+}
+},
+"stateMachine": {
+"state": "init"
+}
+}, {
+"id": "2bcf6305-4bbe-4f10-aece-ac74b8a2a789",
+"name": "Add Documentation",
+"inputInstanceList": [],
+"outputInstanceList": [],
+"inputList": [{
+"name": "Views Module",
+"type": "input",
+"state": "defined"
+}, {
+"name": "Source Code",
+"type": "input",
+"state": "defined"
+}],
+"outputList": [{
+"name": "Documentation",
+"type": "output",
+"state": "modified"
+}],
+"actor": {
+"name": "F1",
+"role": {
+"name": "Frontend Developer",
+"projectManager": "false"
+}
+},
+"stateMachine": {
+"state": "init"
+}
+}, {
+"id": "1ce40d7a-737c-4ec5-800f-3658d166a3d5",
+"name": "Initialize",
+"inputInstanceList": [],
+"outputInstanceList": [],
+"inputList": [],
+"outputList": [{
+"name": "Source Code",
+"type": "output",
+"state": "init"
+}],
+"actor": {
+"name": "TL1",
+"role": {
+"name": "Team Leader",
+"projectManager": "true"
+}
+},
+"stateMachine": {
+"state": "init"
+}
+}, {
+"id": "174425ce-629d-4b3a-842f-80c343e553cd",
+"name": "Merge Branch",
+"inputInstanceList": [],
+"outputInstanceList": [],
+"inputList": [{
+"name": "Views Module",
+"type": "input",
+"state": "defined"
+}, {
+"name": "Controllers Module",
+"type": "input",
+"state": "defined"
+}, {
+"name": "Data Module",
+"type": "input",
+"state": "defined"
+}],
+"outputList": [{
+"name": "Source Code",
+"type": "output",
+"state": "defined"
+}],
+"actor": {
+"name": "TL1",
+"role": {
+"name": "Team Leader",
+"projectManager": "true"
+}
+},
+"stateMachine": {
+"state": "init"
+}
+}, {
+"id": "6f09464f-0363-41b8-b856-7b2d49bbd4ee",
+"name": "Deploy",
+"inputInstanceList": [],
+"outputInstanceList": [],
+"inputList": [{
+"name": "Source Code",
+"type": "input",
+"state": "defined"
+}, {
+"name": "Documentation",
+"type": "input",
+"state": "modified"
+}],
+"outputList": [{
+"name": "Software",
+"type": "output",
+"state": "defined"
+}],
+"actor": {
+"name": "TL1",
+"role": {
+"name": "Team Leader",
+"projectManager": "true"
+}
+},
+"stateMachine": {
+"state": "init"
+}
+}],
+"actorList": [{
+"name": "TL1",
+"role": {
+"name": "Team Leader",
+"projectManager": "true"
+}
+}, {
+"name": "F1",
+"role": {
+"name": "Frontend Developer",
+"projectManager": "false"
+}
+}, {
+"name": "F2",
+"role": {
+"name": "Frontend Developer",
+"projectManager": "false"
+}
+}, {
+"name": "B1",
+"role": {
+"name": "Backend Developer",
+"projectManager": "false"
+}
+}],
+"availableArtifactList": [],
+"processClosed": "false"
+}

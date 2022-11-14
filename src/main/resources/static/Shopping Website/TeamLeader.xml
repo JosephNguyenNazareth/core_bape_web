@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Role name="Team Leader" project_manager="true">
+	<Task name="Initialize">
+		<OutputArtifact name="Source Code" state="init"/>
+	</Task>
+	<Task name="Merge Branch">
+		<InputArtifact name="Views Module" state="defined"/>
+		<InputArtifact name="Controllers Module" state="defined"/>
+		<InputArtifact name="Data Module" state="defined"/>
+		<OutputArtifact name="Source Code" state="defined"/>
+	</Task>
+	<Task name="Deploy">
+		<InputArtifact name="Source Code" state="defined"/>
+		<InputArtifact name="Documentation" state="modified"/>
+		<OutputArtifact name="Software" state="defined"/>
+	</Task>
+</Role>
+

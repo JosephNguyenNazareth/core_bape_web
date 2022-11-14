@@ -1,0 +1,607 @@
+{
+"id": "8e271426-b6ea-497f-8abe-8c7d0a397a78",
+"name": "Shopping Website",
+"creator": {
+"name": "TL1",
+"role": {
+"name": "Team Leader",
+"projectManager": "true"
+}
+},
+"createdTime": "  2022-10-28T11:56:52.452",
+"taskList": [{
+"id": "2d6537d3-3ec2-4845-9f9a-f27148c3d37d",
+"name": "Create Controllers",
+"inputInstanceList": [{
+"id": "2758c835-1ae8-4c35-8e1c-584992675e41",
+"name": "Source Code",
+"type": "output",
+"shared": -1,
+"isLocked": "-1",
+"expectedState": "init",
+"stateMachine": {
+"state": "defined"
+}
+}],
+"outputInstanceList": [{
+"id": "491f6581-bfbb-4583-98fa-0f6b8991ed43",
+"name": "Controllers Module",
+"type": "output",
+"shared": -1,
+"isLocked": "-1",
+"expectedState": "defined",
+"stateMachine": {
+"state": "defined"
+}
+}],
+"inputList": [{
+"name": "Source Code",
+"type": "input",
+"state": "init"
+}],
+"outputList": [{
+"name": "Controllers Module",
+"type": "output",
+"state": "defined"
+}],
+"actor": {
+"name": "B1",
+"role": {
+"name": "Backend Developer",
+"projectManager": "false"
+}
+},
+"stateMachine": null
+}, {
+"id": "6f589f99-00ae-4ae4-84fb-99763eead2a0",
+"name": "Create Data Storage",
+"inputInstanceList": [{
+"id": "2758c835-1ae8-4c35-8e1c-584992675e41",
+"name": "Source Code",
+"type": "output",
+"shared": -1,
+"isLocked": "-1",
+"expectedState": "init",
+"stateMachine": {
+"state": "defined"
+}
+}],
+"outputInstanceList": [{
+"id": "00fa9c71-4478-4af6-9eb5-d99255f59b1a",
+"name": "Data Module",
+"type": "output",
+"shared": -1,
+"isLocked": "-1",
+"expectedState": "defined",
+"stateMachine": {
+"state": "defined"
+}
+}],
+"inputList": [{
+"name": "Source Code",
+"type": "input",
+"state": "init"
+}],
+"outputList": [{
+"name": "Data Module",
+"type": "output",
+"state": "defined"
+}],
+"actor": {
+"name": "B1",
+"role": {
+"name": "Backend Developer",
+"projectManager": "false"
+}
+},
+"stateMachine": null
+}, {
+"id": "b3b17226-31f1-44c4-b24a-fd762fabefcd",
+"name": "Add Documentation",
+"inputInstanceList": [{
+"id": "491f6581-bfbb-4583-98fa-0f6b8991ed43",
+"name": "Controllers Module",
+"type": "output",
+"shared": -1,
+"isLocked": "-1",
+"expectedState": "defined",
+"stateMachine": {
+"state": "defined"
+}
+}, {
+"id": "00fa9c71-4478-4af6-9eb5-d99255f59b1a",
+"name": "Data Module",
+"type": "output",
+"shared": -1,
+"isLocked": "-1",
+"expectedState": "defined",
+"stateMachine": {
+"state": "defined"
+}
+}, {
+"id": "2758c835-1ae8-4c35-8e1c-584992675e41",
+"name": "Source Code",
+"type": "output",
+"shared": -1,
+"isLocked": "-1",
+"expectedState": "init",
+"stateMachine": {
+"state": "defined"
+}
+}, {
+"id": "b1285277-ec78-46bc-85dc-277ceed61507",
+"name": "Source Code",
+"type": "output",
+"shared": -1,
+"isLocked": "-1",
+"expectedState": "defined",
+"stateMachine": {
+"state": "defined"
+}
+}],
+"outputInstanceList": [{
+"id": "41237377-ad1d-4f97-9853-3992d66ccd2c",
+"name": "Documentation",
+"type": "output",
+"shared": -1,
+"isLocked": "-1",
+"expectedState": "modified",
+"stateMachine": {
+"state": "modified"
+}
+}],
+"inputList": [{
+"name": "Controllers Module",
+"type": "input",
+"state": "defined"
+}, {
+"name": "Data Module",
+"type": "input",
+"state": "defined"
+}, {
+"name": "Source Code",
+"type": "input",
+"state": "defined"
+}],
+"outputList": [{
+"name": "Documentation",
+"type": "output",
+"state": "modified"
+}],
+"actor": {
+"name": "B1",
+"role": {
+"name": "Backend Developer",
+"projectManager": "false"
+}
+},
+"stateMachine": null
+}, {
+"id": "d5a60c0f-5070-4249-9820-299dbe1c18c0",
+"name": "Create Views",
+"inputInstanceList": [{
+"id": "2758c835-1ae8-4c35-8e1c-584992675e41",
+"name": "Source Code",
+"type": "output",
+"shared": -1,
+"isLocked": "-1",
+"expectedState": "init",
+"stateMachine": {
+"state": "defined"
+}
+}],
+"outputInstanceList": [{
+"id": "d4d5ea17-71c7-4de4-be89-abe2b82140e2",
+"name": "Views Module",
+"type": "output",
+"shared": 0,
+"isLocked": "0",
+"expectedState": "defined",
+"stateMachine": {
+"state": "defined"
+}
+}],
+"inputList": [{
+"name": "Source Code",
+"type": "input",
+"state": "init"
+}],
+"outputList": [{
+"name": "Views Module",
+"type": "output",
+"state": "defined"
+}],
+"actor": {
+"name": "F1",
+"role": {
+"name": "Frontend Developer",
+"projectManager": "false"
+}
+},
+"stateMachine": null
+}, {
+"id": "af94c6d7-28d2-4ca1-9c00-c27cf6b0a4b7",
+"name": "Add Documentation",
+"inputInstanceList": [{
+"id": "d4d5ea17-71c7-4de4-be89-abe2b82140e2",
+"name": "Views Module",
+"type": "output",
+"shared": 0,
+"isLocked": "0",
+"expectedState": "defined",
+"stateMachine": {
+"state": "defined"
+}
+}, {
+"id": "2758c835-1ae8-4c35-8e1c-584992675e41",
+"name": "Source Code",
+"type": "output",
+"shared": -1,
+"isLocked": "-1",
+"expectedState": "init",
+"stateMachine": {
+"state": "defined"
+}
+}, {
+"id": "b1285277-ec78-46bc-85dc-277ceed61507",
+"name": "Source Code",
+"type": "output",
+"shared": -1,
+"isLocked": "-1",
+"expectedState": "defined",
+"stateMachine": {
+"state": "defined"
+}
+}],
+"outputInstanceList": [{
+"id": "12784353-707d-43d8-bf06-cfe646572aec",
+"name": "Documentation",
+"type": "output",
+"shared": -1,
+"isLocked": "-1",
+"expectedState": "modified",
+"stateMachine": {
+"state": "modified"
+}
+}],
+"inputList": [{
+"name": "Views Module",
+"type": "input",
+"state": "defined"
+}, {
+"name": "Source Code",
+"type": "input",
+"state": "defined"
+}],
+"outputList": [{
+"name": "Documentation",
+"type": "output",
+"state": "modified"
+}],
+"actor": {
+"name": "F1",
+"role": {
+"name": "Frontend Developer",
+"projectManager": "false"
+}
+},
+"stateMachine": null
+}, {
+"id": "5986f4c5-caab-4d5f-8524-4a5dd3fa6504",
+"name": "Initialize",
+"inputInstanceList": [],
+"outputInstanceList": [{
+"id": "2758c835-1ae8-4c35-8e1c-584992675e41",
+"name": "Source Code",
+"type": "output",
+"shared": -1,
+"isLocked": "-1",
+"expectedState": "init",
+"stateMachine": {
+"state": "defined"
+}
+}],
+"inputList": [],
+"outputList": [{
+"name": "Source Code",
+"type": "output",
+"state": "init"
+}],
+"actor": {
+"name": "TL1",
+"role": {
+"name": "Team Leader",
+"projectManager": "true"
+}
+},
+"stateMachine": null
+}, {
+"id": "68bd38ad-e84c-4d8f-8c07-4d17d5b6ca85",
+"name": "Merge Branch",
+"inputInstanceList": [{
+"id": "d4d5ea17-71c7-4de4-be89-abe2b82140e2",
+"name": "Views Module",
+"type": "output",
+"shared": 0,
+"isLocked": "0",
+"expectedState": "defined",
+"stateMachine": {
+"state": "defined"
+}
+}, {
+"id": "491f6581-bfbb-4583-98fa-0f6b8991ed43",
+"name": "Controllers Module",
+"type": "output",
+"shared": -1,
+"isLocked": "-1",
+"expectedState": "defined",
+"stateMachine": {
+"state": "defined"
+}
+}, {
+"id": "00fa9c71-4478-4af6-9eb5-d99255f59b1a",
+"name": "Data Module",
+"type": "output",
+"shared": -1,
+"isLocked": "-1",
+"expectedState": "defined",
+"stateMachine": {
+"state": "defined"
+}
+}],
+"outputInstanceList": [{
+"id": "b1285277-ec78-46bc-85dc-277ceed61507",
+"name": "Source Code",
+"type": "output",
+"shared": -1,
+"isLocked": "-1",
+"expectedState": "defined",
+"stateMachine": {
+"state": "defined"
+}
+}],
+"inputList": [{
+"name": "Views Module",
+"type": "input",
+"state": "defined"
+}, {
+"name": "Controllers Module",
+"type": "input",
+"state": "defined"
+}, {
+"name": "Data Module",
+"type": "input",
+"state": "defined"
+}],
+"outputList": [{
+"name": "Source Code",
+"type": "output",
+"state": "defined"
+}],
+"actor": {
+"name": "TL1",
+"role": {
+"name": "Team Leader",
+"projectManager": "true"
+}
+},
+"stateMachine": null
+}, {
+"id": "25388198-b383-4b27-bc3c-ecc51f2d7a34",
+"name": "Deploy",
+"inputInstanceList": [{
+"id": "2758c835-1ae8-4c35-8e1c-584992675e41",
+"name": "Source Code",
+"type": "output",
+"shared": -1,
+"isLocked": "-1",
+"expectedState": "init",
+"stateMachine": {
+"state": "defined"
+}
+}, {
+"id": "b1285277-ec78-46bc-85dc-277ceed61507",
+"name": "Source Code",
+"type": "output",
+"shared": -1,
+"isLocked": "-1",
+"expectedState": "defined",
+"stateMachine": {
+"state": "defined"
+}
+}, {
+"id": "12784353-707d-43d8-bf06-cfe646572aec",
+"name": "Documentation",
+"type": "output",
+"shared": -1,
+"isLocked": "-1",
+"expectedState": "modified",
+"stateMachine": {
+"state": "modified"
+}
+}, {
+"id": "41237377-ad1d-4f97-9853-3992d66ccd2c",
+"name": "Documentation",
+"type": "output",
+"shared": -1,
+"isLocked": "-1",
+"expectedState": "modified",
+"stateMachine": {
+"state": "modified"
+}
+}],
+"outputInstanceList": [{
+"id": "ccb3d43b-2562-48a2-96b4-3ca3bd46f3f1",
+"name": "Software",
+"type": "output",
+"shared": -1,
+"isLocked": "-1",
+"expectedState": "defined",
+"stateMachine": {
+"state": "defined"
+}
+}],
+"inputList": [{
+"name": "Source Code",
+"type": "input",
+"state": "defined"
+}, {
+"name": "Documentation",
+"type": "input",
+"state": "modified"
+}],
+"outputList": [{
+"name": "Software",
+"type": "output",
+"state": "defined"
+}],
+"actor": {
+"name": "TL1",
+"role": {
+"name": "Team Leader",
+"projectManager": "true"
+}
+},
+"stateMachine": null
+}, {
+"id": "ec2f9897-d875-4b89-940a-98deb3e29ea2",
+"name": "Create Views",
+"inputInstanceList": [{
+"id": "2758c835-1ae8-4c35-8e1c-584992675e41",
+"name": "Source Code",
+"type": "output",
+"shared": -1,
+"isLocked": "-1",
+"expectedState": "init",
+"stateMachine": {
+"state": "defined"
+}
+}],
+"outputInstanceList": [],
+"inputList": [{
+"name": "Source Code",
+"type": "input",
+"state": "init"
+}],
+"outputList": [{
+"name": "Views Module",
+"type": "output",
+"state": "defined"
+}],
+"actor": {
+"name": "F2",
+"role": {
+"name": "Frontend Developer",
+"projectManager": "false"
+}
+},
+"stateMachine": null
+}],
+"actorList": [{
+"name": "TL1",
+"role": {
+"name": "Team Leader",
+"projectManager": "true"
+}
+}, {
+"name": "F1",
+"role": {
+"name": "Frontend Developer",
+"projectManager": "false"
+}
+}, {
+"name": "F2",
+"role": {
+"name": "Frontend Developer",
+"projectManager": "false"
+}
+}, {
+"name": "B1",
+"role": {
+"name": "Backend Developer",
+"projectManager": "false"
+}
+}],
+"availableArtifactList": [{
+"id": "2758c835-1ae8-4c35-8e1c-584992675e41",
+"name": "Source Code",
+"type": "output",
+"shared": -1,
+"isLocked": "-1",
+"expectedState": "init",
+"stateMachine": {
+"state": "defined"
+}
+}, {
+"id": "491f6581-bfbb-4583-98fa-0f6b8991ed43",
+"name": "Controllers Module",
+"type": "output",
+"shared": -1,
+"isLocked": "-1",
+"expectedState": "defined",
+"stateMachine": {
+"state": "defined"
+}
+}, {
+"id": "00fa9c71-4478-4af6-9eb5-d99255f59b1a",
+"name": "Data Module",
+"type": "output",
+"shared": -1,
+"isLocked": "-1",
+"expectedState": "defined",
+"stateMachine": {
+"state": "defined"
+}
+}, {
+"id": "d4d5ea17-71c7-4de4-be89-abe2b82140e2",
+"name": "Views Module",
+"type": "output",
+"shared": 0,
+"isLocked": "0",
+"expectedState": "defined",
+"stateMachine": {
+"state": "defined"
+}
+}, {
+"id": "b1285277-ec78-46bc-85dc-277ceed61507",
+"name": "Source Code",
+"type": "output",
+"shared": -1,
+"isLocked": "-1",
+"expectedState": "defined",
+"stateMachine": {
+"state": "defined"
+}
+}, {
+"id": "12784353-707d-43d8-bf06-cfe646572aec",
+"name": "Documentation",
+"type": "output",
+"shared": -1,
+"isLocked": "-1",
+"expectedState": "modified",
+"stateMachine": {
+"state": "modified"
+}
+}, {
+"id": "41237377-ad1d-4f97-9853-3992d66ccd2c",
+"name": "Documentation",
+"type": "output",
+"shared": -1,
+"isLocked": "-1",
+"expectedState": "modified",
+"stateMachine": {
+"state": "modified"
+}
+}, {
+"id": "ccb3d43b-2562-48a2-96b4-3ca3bd46f3f1",
+"name": "Software",
+"type": "output",
+"shared": -1,
+"isLocked": "-1",
+"expectedState": "defined",
+"stateMachine": {
+"state": "defined"
+}
+}],
+"processClosed": "false"
+}

@@ -1,0 +1,5 @@
+Actor,Role,ProjectManager
+TL1,Team Leader,true
+F1,Frontend Developer,false
+F2,Frontend Developer,false
+B1,Backend Developer,false

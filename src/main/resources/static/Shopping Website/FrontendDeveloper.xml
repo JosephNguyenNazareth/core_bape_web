@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Role name="Frontend Developer" project_manager="false">
+	<Task name="Create Views">
+		<InputArtifact name="Source Code" state="init"/>
+		<OutputArtifact name="Views Module" state="defined"/>
+	</Task>
+	<Task name="Add Documentation">
+		<InputArtifact name="Views Module" state="defined"/>
+		<InputArtifact name="Source Code" state="defined"/>
+		<OutputArtifact name="Documentation" state="modified"/>
+	</Task>
+</Role>
