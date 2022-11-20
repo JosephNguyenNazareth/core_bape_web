@@ -24,12 +24,20 @@ public class ProcessInstanceService {
     public List<ProcessInstance> getProcessInstances() {
         return processInstanceRepository.findAll();
     }
-    public void addNewProcessInstance(String processName, String creatorName) {
+
+    public ProcessInstance getProcessInstance(String processInstanceId) {
+        ProcessInstance processInstance = processInstanceRepository.findById(processInstanceId).orElseThrow(() -> new IllegalStateException("Process instance with id " + processInstanceId + "does not exist."));
+
+        return processInstance;
+    }
+    public String addNewProcessInstance(String processName, String creatorName) {
         CaseStudyBape caseStudyBape = new CaseStudyBapeImpl(processName);
         if (caseStudyBape.getName() != null)
             caseStudyBape.loadProcess(creatorName);
         processInstanceRepository.save(caseStudyBape.getProcessInstance());
+        return caseStudyBape.getProcessInstance().getId();
     }
+
 
     @Transactional
     public void changeState(String processInstanceId, Boolean state) {
@@ -40,7 +48,7 @@ public class ProcessInstanceService {
     }
 
     @Transactional
-    public void startTask(String processInstanceId, String taskName, String actorName) {
+    public String startTask(String processInstanceId, String taskName, String actorName) {
         ProcessInstance processInstanceFound = processInstanceRepository.findById(processInstanceId).orElseThrow(() -> new IllegalStateException("Process instance with id " + processInstanceId + "does not exist."));
 
         TaskInstance taskInstance = processInstanceFound.getTaskByName(taskName, actorName);
@@ -50,26 +58,31 @@ public class ProcessInstanceService {
 
         startTask(processInstanceFound, taskInstance);
         processInstanceRepository.save(processInstanceFound);
+
+        return taskInstance.getId();
     }
 
     public void startTask(ProcessInstance processInstance, TaskInstance currentTask) {
-        if (taskReady(processInstance, currentTask)) {
+        if (taskReady(processInstance, currentTask) == 1) {
             if (currentTask.getStateMachine().getState().equals("waiting"))
                 currentTask.getStateMachine().unlock();
             else if (currentTask.getStateMachine().getState().equals("init"))
                 currentTask.getStateMachine().evolve();
             currentTask.loadInputArtifact(processInstance.getArtifactInstanceList());
-        } else
+        } else if (taskReady(processInstance, currentTask) == 0)
             currentTask.getStateMachine().lock();
     }
 
-    public boolean taskReady(ProcessInstance processInstance,TaskInstance currentTask) {
+    public Integer taskReady(ProcessInstance processInstance,TaskInstance currentTask) {
         List<Artifact> expectedInputList = currentTask.getTaskModel().getInput();
         for (Artifact expectedInput : expectedInputList) {
             if (!processInstance.checkExistenceArtifact(expectedInput))
-                return false;
+                return 0;
         }
-        return true;
+        // not allow duplicate task
+        if (currentTask.getStateMachine().getState().equals("completed"))
+            return 2;
+        return 1;
     }
 
     @Transactional
@@ -143,5 +156,16 @@ public class ProcessInstanceService {
             artifactInstance.setLocked(false);
         else
             artifactInstance.setLocked(true);
+    }
+
+    public Integer validateTask(String processInstanceId, String taskName, String actorName) {
+        ProcessInstance processInstanceFound = processInstanceRepository.findById(processInstanceId).orElseThrow(() -> new IllegalStateException("Process instance with id " + processInstanceId + "does not exist."));
+
+        TaskInstance taskInstance = processInstanceFound.getTaskByName(taskName, actorName);
+
+        if (taskInstance == null)
+            return -1;
+
+        return taskReady(processInstanceFound, taskInstance);
     }
 }
