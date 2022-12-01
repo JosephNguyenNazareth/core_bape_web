@@ -30,13 +30,13 @@ public class CaseStudyBapeImpl implements CaseStudyBape {
     private ProcessInstance processInstance;
 
     public CaseStudyBapeImpl(String name) {
-        File fileProcess = new File("/home/ngmkhoi/Documents/workspace/gitlab/core_bape/src/main/resources/static/" + name);
+        File fileProcess = new File("./src/main/resources/static/" + name);
 
         if (!fileProcess.exists())
             throw new IllegalStateException("Process definition of " + name + " does not exist.");
 
         this.name = name;
-        this.path = "/home/ngmkhoi/Documents/workspace/gitlab/core_bape/src/main/resources/static/" + this.name;
+        this.path = "./src/main/resources/static/" + this.name;
     }
 
     @Override
@@ -52,7 +52,7 @@ public class CaseStudyBapeImpl implements CaseStudyBape {
 
     @Override
     public boolean loadProcessInstanceInfo(String processInstanceId) {
-        String instanceInfoPath =  "/home/ngmkhoi/Documents/workspace/gitlab/core_bape/src/main/resources/static" + this.name + "/processInfo/" + processInstanceId + ".json";
+        String instanceInfoPath =  "./src/main/resources/static" + this.name + "/processInfo/" + processInstanceId + ".json";
         File processInfoFile = new File(instanceInfoPath);
         if (!processInfoFile.exists()) {
             System.out.println("Process Instance is not existed");
@@ -148,7 +148,7 @@ public class CaseStudyBapeImpl implements CaseStudyBape {
         }
         processInstance = new ProcessInstance(processModel, actorList);
         System.out.println(processInstance.getId());
-        saveProcessInstanceInfo();
+//        saveProcessInstanceInfo();
     }
 
     private void loadArtifact(Task task, String type, Element artifactElement, List<Artifact> globalList) {
