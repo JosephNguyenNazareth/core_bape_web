@@ -188,7 +188,7 @@ public class ProcessInstance {
     }
 
     public void saveProcessInstanceInfo() {
-        String instanceInfoPath =  "/home/ngmkhoi/Documents/workspace/gitlab/core_bape/src/main/resources/" + this.processModel.getName() + "/processInfo/";
+        String instanceInfoPath =  "/home/ngmkhoi/Documents/workspace/gitlab/core_bape/src/main/resources/static/" + this.processModel.getName() + "/processInfo/";
         File processInfoFile = new File(instanceInfoPath);
         if (!processInfoFile.isDirectory()) {
             processInfoFile.mkdir();
