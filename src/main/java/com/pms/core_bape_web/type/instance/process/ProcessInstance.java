@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@Document(collection = "process_instance")
+@Document(collection = "#{ProcessInstanceRepository.getCollect}")
 public class ProcessInstance {
     @Id
     private String id;
