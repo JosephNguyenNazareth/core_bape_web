@@ -1,6 +1,7 @@
 package com.pms.core_bape_web.type.instance.process;
 
 import com.pms.core_bape_web.type.instance.PreDefinedArtifactInstance;
+import com.pms.core_bape_web.type.instance.TaskInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,7 +58,7 @@ public class ProcessInstanceController {
     }
 
     @GetMapping(path = "{processInstanceId}/validate-task")
-    public Integer validateTaskInstance(
+    public TaskInstance validateTaskInstance(
             @PathVariable("processInstanceId") String processInstanceId,
             @RequestParam(required = true) String taskName,
             @RequestParam(required = true) String actorName) {

@@ -16,16 +16,15 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Document(collection = "#{ProcessInstanceRepository.getCollect}")
 public class ProcessInstance {
     @Id
     private String id;
     private String createdTime;
-    private boolean processClosed = true;
+    private boolean processClosed = false;
+    private Map<String, String> updateDetail;
     @Transient
     private Actor creator;
     @Transient
@@ -38,6 +37,8 @@ public class ProcessInstance {
     private List<ArtifactInstance> artifactInstanceList;
 
     public ProcessInstance() {
+        this.updateDetail = new HashMap<>();
+        this.updateDetail.put(LocalDateTime.now().toString(), "created");
     }
 
     public ProcessInstance(String id, String createdTime, boolean processClosed, Actor creator, Process processModel, List<TaskInstance> taskInstanceList, List<Actor> actorList, List<ArtifactInstance> artifactInstanceList) {
@@ -49,6 +50,8 @@ public class ProcessInstance {
         this.taskInstanceList = taskInstanceList;
         this.actorList = actorList;
         this.artifactInstanceList = artifactInstanceList;
+        this.updateDetail = new HashMap<>();
+        this.updateDetail.put(LocalDateTime.now().toString(), "created");
     }
 
     public String getId() {
@@ -123,6 +126,7 @@ public class ProcessInstance {
         this.taskInstanceList = new ArrayList<>();
         this.artifactInstanceList = new ArrayList<>();
         this.initTaskInstance(processModel.getTaskList());
+        this.updateDetail.put(LocalDateTime.now().toString(), "created");
     }
 
     public ProcessInstance(JSONObject processInfoLoaded) {
@@ -243,13 +247,18 @@ public class ProcessInstance {
         return true;
     }
 
+    public void update(String details) {
+        this.updateDetail.put(LocalDateTime.now().toString(), details);
+    }
+
     @Override
     public String toString() {
         return "{\n" +
                 "\"id\": \"" + id + "\",\n" +
                 "\"name\": \"" + this.processModel.getName() + "\",\n" +
                 "\"creator\": " + creator + ",\n" +
-                "\"createdTime\": \" " +  createdTime + "\",\n" +
+                "\"createdTime\": \" " + createdTime + "\",\n" +
+                "\"updateDetail\": " + updateDetail + ",\n" +
                 "\"taskList\": " + taskInstanceList + ",\n" +
                 "\"actorList\": " + actorList + ",\n" +
                 "\"availableArtifactList\": " + artifactInstanceList + ",\n" +

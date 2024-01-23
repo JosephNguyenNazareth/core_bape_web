@@ -44,6 +44,8 @@ public class ProcessInstanceService {
         ProcessInstance processInstanceFound = processInstanceRepository.findById(processInstanceId).orElseThrow(() -> new IllegalStateException("Process instance with id " + processInstanceId + "does not exist."));
 
         processInstanceFound.setProcessClosed(state);
+        String processState = state ? "opened" : "closed";
+        processInstanceFound.update("process " + processState);
         processInstanceRepository.save(processInstanceFound);
     }
 
@@ -66,8 +68,11 @@ public class ProcessInstanceService {
         if (taskReady(processInstance, currentTask) == 1) {
             if (currentTask.getStateMachine().getState().equals("waiting"))
                 currentTask.getStateMachine().unlock();
-            else if (currentTask.getStateMachine().getState().equals("init"))
+            else if (currentTask.getStateMachine().getState().equals("init")) {
                 currentTask.getStateMachine().evolve();
+                processInstance.update("startTask: " + currentTask.getTaskModel().getName() + ", id: " + currentTask.getId());
+            }
+
             currentTask.loadInputArtifact(processInstance.getArtifactInstanceList());
         } else if (taskReady(processInstance, currentTask) == 0)
             currentTask.getStateMachine().lock();
@@ -136,6 +141,7 @@ public class ProcessInstanceService {
                 }
             }
             currentTask.getStateMachine().evolve();
+            processInstance.update("startTask: " + currentTask.getTaskModel().getName() + ", id: " + currentTask.getId());
         }
     }
 
@@ -158,14 +164,28 @@ public class ProcessInstanceService {
             artifactInstance.setLocked(true);
     }
 
-    public Integer validateTask(String processInstanceId, String taskName, String actorName) {
+//    public Integer validateTask(String processInstanceId, String taskName, String actorName) {
+//        ProcessInstance processInstanceFound = processInstanceRepository.findById(processInstanceId).orElseThrow(() -> new IllegalStateException("Process instance with id " + processInstanceId + "does not exist."));
+//
+//        TaskInstance taskInstance = processInstanceFound.getTaskByName(taskName, actorName);
+//
+//        if (taskInstance == null)
+//            return -1;
+//
+//        return taskReady(processInstanceFound, taskInstance);
+//    }
+
+    public TaskInstance validateTask(String processInstanceId, String taskName, String actorName) {
         ProcessInstance processInstanceFound = processInstanceRepository.findById(processInstanceId).orElseThrow(() -> new IllegalStateException("Process instance with id " + processInstanceId + "does not exist."));
 
         TaskInstance taskInstance = processInstanceFound.getTaskByName(taskName, actorName);
 
         if (taskInstance == null)
-            return -1;
+            return null;
 
-        return taskReady(processInstanceFound, taskInstance);
+        if (taskReady(processInstanceFound, taskInstance) == 1)
+            return taskInstance;
+        else
+            return null;
     }
 }
