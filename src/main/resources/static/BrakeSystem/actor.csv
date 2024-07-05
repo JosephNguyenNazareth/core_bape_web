@@ -1,0 +1,5 @@
+Actor,Role,ProjectManager
+ESD1,Embedded System Developer,true
+ESD2,Embedded System Developer,false
+ME,Mechanical Engineer,false
+T,Tester,false

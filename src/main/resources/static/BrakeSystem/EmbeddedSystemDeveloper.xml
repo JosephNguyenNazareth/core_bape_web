@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Role name="Embedded System Developer"  project_manager="true">
+    <Task name="Develop braking recognition">
+        <InputArtifact name="Braking condition" state="init"/>
+        <OutputArtifact name="Braking recognition program" state="defined"/>
+    </Task>
+    <Task name="Develop braking alert system">
+        <InputArtifact name="Complete braking system" state="defined"/>
+        <OutputArtifact name="Braking alert system" state="defined"/>
+    </Task>
+    <Task name="Develop RSD degradation alert system">
+        <InputArtifact name="Complete braking system" state="defined"/>
+        <OutputArtifact name="RSD degradation alert system" state="defined"/>
+    </Task>
+</Role>

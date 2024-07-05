@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 
-@Document(collection = "#{ProcessInstanceRepository.getCollect}")
+@Document(collection = "process_instance")
 public class ProcessInstance {
     @Id
     private String id;
@@ -38,7 +38,7 @@ public class ProcessInstance {
 
     public ProcessInstance() {
         this.updateDetail = new HashMap<>();
-        this.updateDetail.put(LocalDateTime.now().toString(), "created");
+        this.updateDetail.put("created", LocalDateTime.now().toString());
     }
 
     public ProcessInstance(String id, String createdTime, boolean processClosed, Actor creator, Process processModel, List<TaskInstance> taskInstanceList, List<Actor> actorList, List<ArtifactInstance> artifactInstanceList) {
@@ -51,7 +51,7 @@ public class ProcessInstance {
         this.actorList = actorList;
         this.artifactInstanceList = artifactInstanceList;
         this.updateDetail = new HashMap<>();
-        this.updateDetail.put(LocalDateTime.now().toString(), "created");
+        this.updateDetail.put("created", LocalDateTime.now().toString());
     }
 
     public String getId() {
@@ -126,7 +126,8 @@ public class ProcessInstance {
         this.taskInstanceList = new ArrayList<>();
         this.artifactInstanceList = new ArrayList<>();
         this.initTaskInstance(processModel.getTaskList());
-        this.updateDetail.put(LocalDateTime.now().toString(), "created");
+        this.updateDetail = new HashMap<>();
+        this.updateDetail.put("created", LocalDateTime.now().toString());
     }
 
     public ProcessInstance(JSONObject processInfoLoaded) {
@@ -248,7 +249,7 @@ public class ProcessInstance {
     }
 
     public void update(String details) {
-        this.updateDetail.put(LocalDateTime.now().toString(), details);
+        this.updateDetail.put(details, LocalDateTime.now().toString());
     }
 
     @Override

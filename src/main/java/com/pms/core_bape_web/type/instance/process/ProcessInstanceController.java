@@ -1,7 +1,9 @@
 package com.pms.core_bape_web.type.instance.process;
 
+import com.pms.core_bape_web.type.instance.Actor;
 import com.pms.core_bape_web.type.instance.PreDefinedArtifactInstance;
 import com.pms.core_bape_web.type.instance.TaskInstance;
+import com.pms.core_bape_web.type.model.Artifact;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +24,11 @@ public class ProcessInstanceController {
         return processInstanceService.getProcessInstances();
     }
 
+    @GetMapping(path = "name/{processInstanceName}")
+    public List<ProcessInstance> getProcessInstancesByName() {
+        return processInstanceService.getProcessInstances();
+    }
+
     @GetMapping(path = "{processInstanceId}")
     public ProcessInstance getProcessInstance(@PathVariable String processInstanceId) {
         return processInstanceService.getProcessInstance(processInstanceId);
@@ -39,6 +46,12 @@ public class ProcessInstanceController {
             @PathVariable("processInstanceId") String processInstanceId,
             @RequestParam(required = true) Boolean processInstanceState) {
         processInstanceService.changeState(processInstanceId, processInstanceState);
+    }
+
+    @GetMapping(path = "{processInstanceId}/get-task")
+    public List<String> getTask(
+            @PathVariable("processInstanceId") String processInstanceId) {
+        return processInstanceService.getTask(processInstanceId);
     }
 
     @PutMapping(path = "{processInstanceId}/start-task")
@@ -63,5 +76,20 @@ public class ProcessInstanceController {
             @RequestParam(required = true) String taskName,
             @RequestParam(required = true) String actorName) {
         return processInstanceService.validateTask(processInstanceId, taskName, actorName);
+    }
+
+    @GetMapping(path = "{processInstanceId}/data-object")
+    public List<Artifact> getArtifact(@PathVariable("processInstanceId") String processInstanceId) {
+        return processInstanceService.getArtifact(processInstanceId);
+    }
+
+    @GetMapping(path = "{processInstanceId}/users")
+    public List<Actor> getUsers(@PathVariable("processInstanceId") String processInstanceId) {
+        return processInstanceService.getActors(processInstanceId);
+    }
+
+    @GetMapping(path = "log")
+    public String getLog() {
+        return processInstanceService.getLog();
     }
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Role name="Mechanical Engineer"  project_manager="false">
+    <Task name="Install remote sensing devices (RSD)">
+        <InputArtifact name="Remote sensing devices" state="init"/>
+        <InputArtifact name="Installation designs" state="init"/>
+        <OutputArtifact name="RSDs on the car" state="defined"/>
+    </Task>
+    <Task name="Connect RSD with brake control system">
+        <InputArtifact name="RSDs on the car" state="defined"/>
+        <OutputArtifact name="Complete braking system" state="defined"/>
+    </Task>
+</Role>

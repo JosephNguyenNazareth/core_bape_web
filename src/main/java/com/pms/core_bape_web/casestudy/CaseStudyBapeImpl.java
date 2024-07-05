@@ -121,6 +121,7 @@ public class CaseStudyBapeImpl implements CaseStudyBape {
         for (Actor actor : actorList) {
             if (actor.getName().equals(creatorName)) {
                 correctCreator = actor.getRole().isProjectManager();
+                break;
             }
         }
 

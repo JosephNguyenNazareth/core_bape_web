@@ -38,9 +38,6 @@ public class Actor {
 
     @Override
     public String toString() {
-        return "{\n" +
-                "\"name\": \"" + name + "\",\n" +
-                "\"role\": " + role + "\n" +
-                "}";
+        return name + " : " + role;
     }
 }

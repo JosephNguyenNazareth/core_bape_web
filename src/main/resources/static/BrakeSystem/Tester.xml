@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Role name="Tester"  project_manager="false">
+    <Task name="Evaluate braking performance">
+        <InputArtifact name="Braking alert system" state="defined"/>
+        <InputArtifact name="RSD degradation alert system" state="defined"/>
+        <OutputArtifact name="Complete braking system evaluation" state="defined"/>
+    </Task>
+</Role>

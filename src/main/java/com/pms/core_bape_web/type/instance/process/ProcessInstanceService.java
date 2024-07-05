@@ -2,27 +2,49 @@ package com.pms.core_bape_web.type.instance.process;
 
 import com.pms.core_bape_web.casestudy.CaseStudyBape;
 import com.pms.core_bape_web.casestudy.CaseStudyBapeImpl;
+import com.pms.core_bape_web.type.instance.Actor;
 import com.pms.core_bape_web.type.instance.ArtifactInstance;
 import com.pms.core_bape_web.type.instance.PreDefinedArtifactInstance;
 import com.pms.core_bape_web.type.instance.TaskInstance;
 import com.pms.core_bape_web.type.model.Artifact;
+import com.pms.core_bape_web.type.model.Task;
+import com.pms.core_bape_web.utils.Logging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ProcessInstanceService {
     private final ProcessInstanceRepository processInstanceRepository;
+    private Logging history;
 
     @Autowired
     public ProcessInstanceService(ProcessInstanceRepository processInstanceRepository) {
         this.processInstanceRepository = processInstanceRepository;
+        this.history = new Logging();
+    }
+
+    public String getLog() {
+        return this.history.loadLog();
     }
 
     public List<ProcessInstance> getProcessInstances() {
         return processInstanceRepository.findAll();
+    }
+
+    public List<ProcessInstance> getProcessInstanceByName(String processInstanceName) {
+        List<ProcessInstance> processInstanceList = processInstanceRepository.findAll();
+        List<ProcessInstance> returnedList = new ArrayList<>();
+
+        for (ProcessInstance processInstance: processInstanceList) {
+            if (processInstance.getProcessModel().getName().equals(processInstanceName))
+                returnedList.add(processInstance);
+        }
+
+        return returnedList;
     }
 
     public ProcessInstance getProcessInstance(String processInstanceId) {
@@ -34,7 +56,10 @@ public class ProcessInstanceService {
         CaseStudyBape caseStudyBape = new CaseStudyBapeImpl(processName);
         if (caseStudyBape.getName() != null)
             caseStudyBape.loadProcess(creatorName);
+
+        this.history.writeLog("Process instance " + caseStudyBape.getProcessInstance().getId() + " created.");
         processInstanceRepository.save(caseStudyBape.getProcessInstance());
+
         return caseStudyBape.getProcessInstance().getId();
     }
 
@@ -46,7 +71,21 @@ public class ProcessInstanceService {
         processInstanceFound.setProcessClosed(state);
         String processState = state ? "opened" : "closed";
         processInstanceFound.update("process " + processState);
+
+        this.history.writeLog("Process instance " + processInstanceFound.getId() + " stage changed.");
         processInstanceRepository.save(processInstanceFound);
+    }
+
+    public List<String> getTask(String processInstanceId) {
+        ProcessInstance processInstanceFound = processInstanceRepository.findById(processInstanceId).orElseThrow(() -> new IllegalStateException("Process instance with id " + processInstanceId + "does not exist."));
+
+        List<Task> taskList = processInstanceFound.getProcessModel().getTaskList();
+        List<String> taskNameList = new ArrayList<>();
+        for (Task task : taskList) {
+            taskNameList.add(task.getName());
+        }
+
+        return taskNameList;
     }
 
     @Transactional
@@ -58,6 +97,7 @@ public class ProcessInstanceService {
         if (taskInstance == null)
             throw new IllegalStateException("Cannot start new task instance.");
 
+        this.history.writeLog("Task instance of " + taskName + "in process instance " + processInstanceFound.getId() + " started.");
         startTask(processInstanceFound, taskInstance);
         processInstanceRepository.save(processInstanceFound);
 
@@ -99,6 +139,7 @@ public class ProcessInstanceService {
         if (taskInstance == null)
             throw new IllegalStateException("Task instance with id " + taskId + "does not exist.");
 
+        this.history.writeLog("Task instance of " + taskInstance.getTaskModel().getName() + "in process instance " + processInstanceFound.getId() + " completed.");
         endTask(processInstanceFound, taskInstance, preDefinedArtifactInstanceList);
         processInstanceRepository.save(processInstanceFound);
     }
@@ -187,5 +228,23 @@ public class ProcessInstanceService {
             return taskInstance;
         else
             return null;
+    }
+
+    public List<Artifact> getArtifact(String processInstanceId) {
+        ProcessInstance processInstanceFound = processInstanceRepository.findById(processInstanceId).orElseThrow(() -> new IllegalStateException("Process instance with id " + processInstanceId + "does not exist."));
+        List<Artifact> completeArtifactList = new ArrayList<>();
+        for (Task task : processInstanceFound.getProcessModel().getTaskList()) {
+            for (Artifact artifact: task.getInput()) {
+                if (!completeArtifactList.contains(artifact))
+                    completeArtifactList.add(artifact);
+            }
+        }
+
+        return completeArtifactList;
+    }
+
+    public List<Actor> getActors(String processInstanceId) {
+        ProcessInstance processInstanceFound = processInstanceRepository.findById(processInstanceId).orElseThrow(() -> new IllegalStateException("Process instance with id " + processInstanceId + "does not exist."));
+        return processInstanceFound.getActorList();
     }
 }
