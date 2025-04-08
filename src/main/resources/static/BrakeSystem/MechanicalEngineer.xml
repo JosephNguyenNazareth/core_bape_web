@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Role name="Mechanical Engineer"  project_manager="false">
-    <Task name="Install remote sensing devices (RSD)">
-        <InputArtifact name="Remote sensing devices" state="init"/>
-        <InputArtifact name="Installation designs" state="init"/>
-        <OutputArtifact name="RSDs on the car" state="defined"/>
+    <Task name="Design brake system blueprint">
+        <OutputArtifact name="Blueprint" state="defined"/>
     </Task>
     <Task name="Connect RSD with brake control system">
-        <InputArtifact name="RSDs on the car" state="defined"/>
+        <InputArtifact name="Brake, RSD, Blueprint" state="defined"/>
         <OutputArtifact name="Complete braking system" state="defined"/>
+    </Task>
+    <Task name="Assemble the system into a prototype vehicle">
+        <InputArtifact name="Complete braking system" state="defined"/>
+        <OutputArtifact name="Prototype vehicle with braking system" state="defined"/>
     </Task>
 </Role>

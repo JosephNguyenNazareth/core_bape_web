@@ -88,6 +88,18 @@ public class ProcessInstanceService {
         return taskNameList;
     }
 
+    public Task getTask(String processInstanceId, String taskName) {
+        ProcessInstance processInstanceFound = processInstanceRepository.findById(processInstanceId).orElseThrow(() -> new IllegalStateException("Process instance with id " + processInstanceId + "does not exist."));
+
+        List<Task> taskList = processInstanceFound.getProcessModel().getTaskList();
+        for (Task task : taskList) {
+            if (task.getName().equals(taskName))
+                return task;
+        }
+
+        return null;
+    }
+
     @Transactional
     public String startTask(String processInstanceId, String taskName, String actorName) {
         ProcessInstance processInstanceFound = processInstanceRepository.findById(processInstanceId).orElseThrow(() -> new IllegalStateException("Process instance with id " + processInstanceId + "does not exist."));
@@ -124,10 +136,34 @@ public class ProcessInstanceService {
             if (!processInstance.checkExistenceArtifact(expectedInput))
                 return 0;
         }
+
         // not allow duplicate task
         if (currentTask.getStateMachine().getState().equals("completed"))
             return 2;
         return 1;
+    }
+
+    @Transactional
+    public String abortTask(String processInstanceId, String taskName, String actorName) {
+        ProcessInstance processInstanceFound = processInstanceRepository.findById(processInstanceId).orElseThrow(() -> new IllegalStateException("Process instance with id " + processInstanceId + "does not exist."));
+
+        TaskInstance taskInstance = processInstanceFound.getTaskByName(taskName, actorName);
+
+        if (taskInstance == null)
+            throw new IllegalStateException("Cannot abort given task instance.");
+
+        this.history.writeLog("Task instance of " + taskName + "in process instance " + processInstanceFound.getId() + " aborted.");
+        abortTask(processInstanceFound, taskInstance);
+        processInstanceRepository.save(processInstanceFound);
+
+        return taskInstance.getId();
+    }
+
+    public void abortTask(ProcessInstance processInstance, TaskInstance currentTask) {
+        if (taskReady(processInstance, currentTask) == 1) {
+            currentTask.getStateMachine().reset();
+        } else if (taskReady(processInstance, currentTask) == 0)
+            currentTask.getStateMachine().lock();
     }
 
     @Transactional

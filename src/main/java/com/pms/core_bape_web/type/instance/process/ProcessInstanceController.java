@@ -4,6 +4,7 @@ import com.pms.core_bape_web.type.instance.Actor;
 import com.pms.core_bape_web.type.instance.PreDefinedArtifactInstance;
 import com.pms.core_bape_web.type.instance.TaskInstance;
 import com.pms.core_bape_web.type.model.Artifact;
+import com.pms.core_bape_web.type.model.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,10 +49,17 @@ public class ProcessInstanceController {
         processInstanceService.changeState(processInstanceId, processInstanceState);
     }
 
-    @GetMapping(path = "{processInstanceId}/get-task")
+    @GetMapping(path = "{processInstanceId}/get-tasks")
     public List<String> getTask(
             @PathVariable("processInstanceId") String processInstanceId) {
         return processInstanceService.getTask(processInstanceId);
+    }
+
+    @GetMapping(path = "{processInstanceId}/get-task")
+    public Task getTask(
+            @PathVariable("processInstanceId") String processInstanceId,
+            @RequestParam("taskName") String taskName) {
+        return processInstanceService.getTask(processInstanceId, taskName);
     }
 
     @PutMapping(path = "{processInstanceId}/start-task")
@@ -60,6 +68,14 @@ public class ProcessInstanceController {
             @RequestParam(required = true) String taskName,
             @RequestParam(required = true) String actorName) {
         return processInstanceService.startTask(processInstanceId, taskName, actorName);
+    }
+
+    @PutMapping(path = "{processInstanceId}/abort-task")
+    public String abortTask(
+            @PathVariable("processInstanceId") String processInstanceId,
+            @RequestParam(required = true) String taskName,
+            @RequestParam(required = true) String actorName) {
+        return processInstanceService.abortTask(processInstanceId, taskName, actorName);
     }
 
     @PutMapping(path = "{processInstanceId}/end-task")

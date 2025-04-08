@@ -50,6 +50,11 @@ public class TaskSM {
         System.out.println(currentTaskId + " in state " + this.state);
     }
 
+    public void reset() {
+        state = "init";
+        System.out.println(currentTaskId + " in state " + this.state);
+    }
+
     @Override
     public String toString() {
         return "{\n" +
