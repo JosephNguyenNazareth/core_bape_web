@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 
-@Document(collection = "process_instance")
+@Document(collection = "process_instance_test")
 public class ProcessInstance {
     @Id
     private String id;
@@ -156,7 +156,7 @@ public class ProcessInstance {
             System.out.println("Please specify project manager who permits starting a process instance.");
     }
 
-    private void initTaskInstance(List<Task> taskListModel) {
+    public void initTaskInstance(List<Task> taskListModel) {
         for (Task task : taskListModel) {
             for (Actor actor : this.actorList) {
                 if (actor.getRole().equals(task.getRole())) {

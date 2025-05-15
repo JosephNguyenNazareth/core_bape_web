@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Role name="dev"  project_manager="true">
+    <Task name="T1">
+        <OutputArtifact name="a1" state="State1"/>
+    </Task>
+    <Task name="T2">
+        <InputArtifact name="a1" state="State1"/>
+    </Task>
+</Role>
